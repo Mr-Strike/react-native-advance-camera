@@ -192,12 +192,14 @@ export default class CameraFlowWrapper extends React.Component {
   renderCropperView = () => {
     const { modalViewWrapper } = Styles
     const { imageClicked } = this.state
+    const { cropperProps } = this.props
     return (
       <View style={modalViewWrapper}>
         <ImageCropperView
           goBackFrom={this.handleBackButtonOnCamera}
           imageClicked={imageClicked}
           saveImageAfterCrop={this.saveImageAfterCrop}
+          { ...cropperProps }
         />
       </View>
     )
@@ -295,6 +297,12 @@ CameraFlowWrapper.propTypes = {
   renderCameraModal: PropTypes.func.isRequired, // To Toggle Camera Modal
   titleText: PropTypes.string, // Title for which Modal is enabled
   renderCustomCameraFooterView: PropTypes.func, // Function returning a React Component (Custom footer for Camera View)
+
+  cropperProps: PropTypes.shape({
+    borderWidth: PropTypes.number,
+    footerHeight: PropTypes.number,
+    unSelectedAreaOpacity: PropTypes.number,  // Between 0-1
+  }),
 }
 
 CameraFlowWrapper.defaultProps = {
@@ -312,5 +320,12 @@ CameraFlowWrapper.defaultProps = {
   descText: 'You will need to upload both front and back of the ID',
   gallerySubmitButtonText: 'Done',
   galleryCancelButtonText: 'Cancel',
-  renderCustomCameraFooterView: undefined
+  renderCustomCameraFooterView: undefined,
+
+  // Image Cropper Props
+  cropperProps: {
+    borderWidth: 20,
+    footerHeight: 100,
+    unSelectedAreaOpacity: 0.4,  // Between 0-1
+  },
 }
