@@ -309,6 +309,7 @@ CameraFlowWrapper.propTypes = {
 
   cameraProps: PropTypes.shape({
     cameraType: "back" | "front", // "back" | "front"
+    ratio: PropTypes.string,
   }),
 }
 
@@ -338,6 +339,7 @@ CameraFlowWrapper.defaultProps = {
 
   // Camera Props
   cameraProps: {
-    cameraType: 'back'
+    cameraType: 'back',
+    ratio: '1:1',
   }
 }

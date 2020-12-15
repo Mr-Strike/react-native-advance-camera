@@ -155,7 +155,7 @@ export default class CameraViewWrapper extends React.Component {
   render() {
     const { bottomView, preview, topView, mainBody, cameraContainer } = Styles
     const { cameraType } = this.state
-    const { renderCustomCameraFooterView } = this.props
+    const { renderCustomCameraFooterView, ratio } = this.props
     return (
       <View style={mainBody}>
         <View style={topView}>
@@ -166,7 +166,7 @@ export default class CameraViewWrapper extends React.Component {
             ref={c => {
               this.camera = c
             }}
-            ratio="1:1"
+            ratio={ratio}
             style={preview}
             type={cameraType}
           />
@@ -183,6 +183,7 @@ CameraViewWrapper.propTypes = {
   cameraType: "back" | "front", // "back" | "front"
   disableButton: PropTypes.bool.isRequired,
   handleBackButtonOnCamera: PropTypes.func.isRequired,
+  ratio: PropTypes.string,
   headerText: PropTypes.string, // To Toggle Camera Button
   isNoBlurPresent: PropTypes.bool, // To Toggle Camera Modal
   isSwapButton: PropTypes.bool, // To Toggle Camera Modal
@@ -198,6 +199,7 @@ CameraViewWrapper.defaultProps = {
   cameraType: "back", // "back" | "front",
   titleText: '',
   headerText: '',
+  ratio: '1:1',
   isSwapButton: true,
   isNoBlurPresent: true,
   setLoading: () => {},
