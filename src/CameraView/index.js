@@ -14,8 +14,9 @@ import { CROSS_ICON, CAMERA_IMAGES } from '../utils'
 export default class CameraViewWrapper extends React.Component {
   constructor(props) {
     super(props)
+    const { cameraType } = props
     this.state = {
-      cameraType: 'back',
+      cameraType: cameraType,
     }
   }
 
@@ -179,6 +180,7 @@ export default class CameraViewWrapper extends React.Component {
 }
 
 CameraViewWrapper.propTypes = {
+  cameraType: "back" | "front", // "back" | "front"
   disableButton: PropTypes.bool.isRequired,
   handleBackButtonOnCamera: PropTypes.func.isRequired,
   headerText: PropTypes.string, // To Toggle Camera Button
@@ -193,6 +195,7 @@ CameraViewWrapper.propTypes = {
 }
 
 CameraViewWrapper.defaultProps = {
+  cameraType: "back", // "back" | "front",
   titleText: '',
   headerText: '',
   isSwapButton: true,

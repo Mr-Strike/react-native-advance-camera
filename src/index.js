@@ -170,7 +170,9 @@ export default class CameraFlowWrapper extends React.Component {
   renderCameraView = () => {
     const { modalViewWrapper } = Styles
     const { disableButton } = this.state
-    const { titleText, renderCameraModal, isSwapButton, renderCustomCameraFooterView } = this.props
+    const {
+      titleText, renderCameraModal, isSwapButton,
+      renderCustomCameraFooterView, cameraProps } = this.props
     return (
       <View style={modalViewWrapper}>
         <CameraView
@@ -183,6 +185,7 @@ export default class CameraFlowWrapper extends React.Component {
           takePicture={this.takePicture}
           titleText={titleText}
           renderCustomCameraFooterView={renderCustomCameraFooterView}
+          { ...cameraProps }
         />
       </View>
     )
@@ -303,6 +306,10 @@ CameraFlowWrapper.propTypes = {
     footerHeight: PropTypes.number,
     unSelectedAreaOpacity: PropTypes.number,  // Between 0-1
   }),
+
+  cameraProps: PropTypes.shape({
+    cameraType: "back" | "front", // "back" | "front"
+  }),
 }
 
 CameraFlowWrapper.defaultProps = {
@@ -328,4 +335,9 @@ CameraFlowWrapper.defaultProps = {
     footerHeight: 100,
     unSelectedAreaOpacity: 0.4,  // Between 0-1
   },
+
+  // Camera Props
+  cameraProps: {
+    cameraType: 'back'
+  }
 }
