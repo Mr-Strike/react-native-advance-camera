@@ -108,7 +108,7 @@ export default class CameraFlowWrapper extends React.Component {
       type: 'clicked',
       fileName: getFileNameFromURI(imageUrl),
       fileType: getFileTypeFromURI(imageUrl),
-      base64String: base64String ? convertFileUrlToBase64(imageUrl) : null,
+      base64String: base64String ? await convertFileUrlToBase64(imageUrl) : null,
       isSelected: true,
     })
 
@@ -121,6 +121,7 @@ export default class CameraFlowWrapper extends React.Component {
 
   // Executes on positive response from image cropper
   saveImageAfterCrop = async croppedImageData => {
+    const { base64String } = this.props
     this.setState({
       isLoading: true,
     })
@@ -135,7 +136,16 @@ export default class CameraFlowWrapper extends React.Component {
       this.addToImagesStackArray(imageUri)
     }
     else {
-      this.onSubmitPhoto(imageUri)
+      this.onSubmitPhoto({
+        uri: imageUri,
+        imageUri,
+        type: 'clicked',
+        fileName: getFileNameFromURI(imageUri),
+        fileType: getFileTypeFromURI(imageUri),
+        base64String: base64String ? await convertFileUrlToBase64(imageUri) : null,
+        isSelected: true,
+      })
+      // this.onSubmitPhoto(imageUri)
     }
   }
 
